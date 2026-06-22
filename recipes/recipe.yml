@@ -6,8 +6,8 @@ name: cobalt
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/base-main
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -20,17 +20,43 @@ modules:
   - type: dnf
     repos:
       copr:
-        - atim/starship
+        - yalter/niri
+        - lionheartp/Hyprland
     install:
       packages:
-        - micro
-        - starship
-    remove:
-      packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        # Misc libs
+        - pipewire 
+        - wireplumber
+        - gvfs 
+        - xdg-desktop-portal-gtk 
+        - xdg-desktop-portal-gnome 
+        - gnome-keyring
+        - qt6-qtsvg 
+        - qt6-qtvirtualkeyboard 
+        - qt6-qtmultimedia 
+        - qt6-qtimageformats
+
+        # Apps
+        - fastfetch 
+        - alacritty 
+        - nemo
+
+        # DE and login stuff
+        - niri 
+        - quickshell 
+        - hyprland 
+        - sddm
+
+        # DE dependencies
+        - hyprpaper 
+        - hyprpolkitagent 
+        - hyprland-guiutils
+    # remove:
+    #   packages:
+    #     # example: removing firefox (in favor of the flatpak)
+    #     # "firefox" is the main package, "firefox-langpacks" is a dependency
+    #     - firefox
+    #     - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
   - type: default-flatpaks
     configurations:
@@ -38,8 +64,7 @@ modules:
         scope: system
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
+          - io.github.kolunmi.Bazaar
       - scope: user # Also add Flathub user repo, but no user packages
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
