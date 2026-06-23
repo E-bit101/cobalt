@@ -40,6 +40,7 @@ modules:
         - fastfetch 
         - alacritty 
         - nemo
+        - steam
 
         # DE and login stuff
         - niri 
