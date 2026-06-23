@@ -9,11 +9,8 @@ Scope {
         delegate: Component {
             PanelWindow {
                 required property var modelData
-
-                // Put this window on the current monitor
                 screen: modelData
 
-                // Behind everything
                 WlrLayershell.layer: WlrLayer.Background
                 exclusionMode: ExclusionMode.Ignore
 
@@ -29,7 +26,7 @@ Scope {
                 Image {
                     anchors.fill: parent
 
-                    source: "file:///home/youruser/Pictures/wallpaper.svg"
+                    source: "temp-wallpaper.svg"
 
                     fillMode: Image.PreserveAspectCrop
                     smooth: true
