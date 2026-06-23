@@ -1,3 +1,5 @@
+// Wallpaper.qml
+
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
@@ -7,30 +9,54 @@ Scope {
         model: Quickshell.screens
 
         delegate: Component {
-            PanelWindow {
+            Scope {
                 required property var modelData
-                screen: modelData
 
-                WlrLayershell.layer: WlrLayer.Background
-                exclusionMode: ExclusionMode.Ignore
+                // Normal desktop wallpaper
+                PanelWindow {
+                    screen: modelData
 
-                anchors {
-                    top: true
-                    bottom: true
-                    left: true
-                    right: true
+                    WlrLayershell.layer: WlrLayer.Background
+                    WlrLayershell.namespace: "wallpaper"
+
+                    exclusionMode: ExclusionMode.Ignore
+
+                    anchors {
+                        top: true
+                        bottom: true
+                        left: true
+                        right: true
+                    }
+
+                    Image {
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("temp-wallpaper.svg")
+                        fillMode: Image.PreserveAspectCrop
+                    }
                 }
 
-                color: "transparent"
+                // Wallpaper used by the overview backdrop
+                PanelWindow {
+                    screen: modelData
 
-                Image {
-                    anchors.fill: parent
+                    WlrLayershell.layer: WlrLayer.Background
+                    WlrLayershell.namespace: "overview-wallpaper"
 
-                    source: "temp-wallpaper.svg"
+                    exclusionMode: ExclusionMode.Ignore
 
-                    fillMode: Image.PreserveAspectCrop
-                    smooth: true
-                    asynchronous: true
+                    anchors {
+                        top: true
+                        bottom: true
+                        left: true
+                        right: true
+                    }
+
+                    Image {
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("temp-wallpaper.svg")
+                        fillMode: Image.PreserveAspectCrop
+                        opacity: 0.6
+                    }
                 }
             }
         }
