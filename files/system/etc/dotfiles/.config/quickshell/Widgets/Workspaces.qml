@@ -16,12 +16,12 @@ Row {
         Rectangle {
             required property var modelData
 
-            width: 24
+            width: 28
             height: 16
             radius: 8
 
             color: modelData.is_active
-                ? "#ffffff"
+                ? "#006eff"
                 : "#444444"
 
             Text {
@@ -30,7 +30,7 @@ Row {
                 text: modelData.idx
 
                 color: modelData.is_active
-                    ? "#000000"
+                    ? "#ffffff"
                     : "#ffffff"
             }
 

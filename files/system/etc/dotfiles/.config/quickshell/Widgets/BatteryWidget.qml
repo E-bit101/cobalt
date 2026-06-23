@@ -7,8 +7,8 @@ Text {
     color: Battery.percent < 20
         ? "red"
         : Battery.status == "Charging"
-            ? "green"
+            ? "#5fff5f"
             : Battery.status == "Not charging"
-                ? "blue"
+                ? "#006eff"
                 : "white"
 }

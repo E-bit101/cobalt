@@ -7,6 +7,7 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
+            color: "transparent"
             required property var modelData
 
             screen: modelData
@@ -17,11 +18,20 @@ Scope {
                 right: true
             }
 
-            implicitHeight: 32
+            implicitHeight: 42
+            exclusiveZone: 32
 
             Rectangle {
-                anchors.fill: parent
-                color: "#202020"
+                id: bar
+
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
+
+                height: 32
+                color: "#000000"
 
                 Workspaces {
                     screen: modelData
@@ -42,6 +52,28 @@ Scope {
                         right: parent.right
                         rightMargin: 10
                         verticalCenter: parent.verticalCenter
+                    }
+                }
+            }
+
+            Rectangle {
+                anchors {
+                    top: bar.bottom
+                    left: bar.left
+                    right: bar.right
+                }
+
+                height: 10
+                color: "transparent"
+
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: "#80000000"
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: "#00000000"
                     }
                 }
             }

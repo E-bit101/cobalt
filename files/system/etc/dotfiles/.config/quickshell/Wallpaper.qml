@@ -55,7 +55,6 @@ Scope {
                         anchors.fill: parent
                         source: Qt.resolvedUrl("temp-wallpaper.svg")
                         fillMode: Image.PreserveAspectCrop
-                        opacity: 0.6
                     }
                 }
             }

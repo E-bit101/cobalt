@@ -6,6 +6,13 @@
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Input
+
+blur {
+    passes 3
+    offset 3.0
+    noise 0.02
+}
+
 input {
     keyboard {
         xkb {
@@ -566,7 +573,7 @@ binds {
     // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
     // This bind corresponds to normal window maximizing,
     // e.g. by double-clicking on the titlebar.
-    Mod+M { maximize-window-to-edges; }
+    Mod+Shift+Ctrl+F { maximize-window-to-edges; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
@@ -630,14 +637,4 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
-}
-
-layer-rule {
-    match namespace="^overview-wallpaper$"
-    place-within-backdrop true
-
-    background-effect {
-        blur true
-        xray true
-    }
 }
