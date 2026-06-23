@@ -1,0 +1,9 @@
+[general]
+import = [
+    "~/.config/alacritty/hyper.toml"
+]
+
+[window]
+decorations = "none"
+decorations_theme_variant = "Dark"
+opacity = 0.92

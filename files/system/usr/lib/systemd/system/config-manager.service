@@ -1,0 +1,11 @@
+[Unit]
+Description=Config Initialization
+Before=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/lib/config-manager/update.py
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
