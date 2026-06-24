@@ -1,0 +1,20 @@
+{
+    "binds": {
+        "Mod+T": "terminal",
+        "Mod+M": "exit",
+        "Mod+E": "fileManager",
+        "Mod+V": "floating",
+        "Mod+R": "launcher",
+        "Mod+J": "applyPreset",
+        "Mod+C": "close",
+        "Mod+<number>": "workspace<number>",
+        "Mod+Ctrl+<number>": "moveToWorkspace<number>",
+        "Mod+scrollUp": "prevWorkspace",
+        "Mod+scrollDown": "nextWorkspace",
+        "Mod+Shift+scrollUp": "prevWindow",
+        "Mod+Shift+scrollDown": "nextWindow",
+        "Mod+Shift+F": "maximize",
+        "Mod+F": "fullscreen",
+        "Mod+Shift+/": "keybinds"
+    }
+}

@@ -1,6 +1,8 @@
-import os
-import pwd
-import shutil
+import os, pwd, shutil
+import updateHypr as hypr
+import updateNiri as niri
+import updateSddm as sddm
+import updateQs as qs
 
 SOURCE_DIR = "/etc/dotfiles"
 
@@ -22,8 +24,11 @@ for user in pwd.getpwall():
         else:
             shutil.copy2(src, dst)
 
-    with open("/etc/sddm.conf.d/theme.conf", "w") as f:
-        f.write(
-"""[Theme]
-Current=elarun"""
-        )
+        shutil.chown(dst, user.pw_uid)
+
+    sddm.update(home)
+    niri.update(home)
+    hypr.update(home)
+    qs.update(home)
+
+    

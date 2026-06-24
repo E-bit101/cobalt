@@ -1,5 +1,3 @@
-// Wallpaper.qml
-
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
@@ -53,7 +51,7 @@ Scope {
 
                     Image {
                         anchors.fill: parent
-                        source: Qt.resolvedUrl("temp-wallpaper.svg")
+                        source: Qt.resolvedUrl("temp-overview-wallpaper.svg")
                         fillMode: Image.PreserveAspectCrop
                     }
                 }

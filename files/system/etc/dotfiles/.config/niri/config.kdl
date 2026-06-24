@@ -638,3 +638,8 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
+
+layer-rule {
+    match namespace="^overview-wallpaper$"
+    place-within-backdrop true
+}
