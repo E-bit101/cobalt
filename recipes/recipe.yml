@@ -52,6 +52,8 @@ modules:
         # DE dependencies
         - hyprpolkitagent 
         - hyprland-guiutils
+        - grim
+        - slurp
     # remove:
     #   packages:
     #     # example: removing firefox (in favor of the flatpak)

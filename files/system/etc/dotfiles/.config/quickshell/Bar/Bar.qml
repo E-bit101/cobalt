@@ -1,5 +1,6 @@
 import Quickshell
 import QtQuick
+import Quickshell.Wayland
 import "../Widgets"
 
 Scope {
@@ -23,6 +24,7 @@ Scope {
 
             Rectangle {
                 id: bar
+                
 
                 anchors {
                     top: parent.top

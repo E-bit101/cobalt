@@ -51,7 +51,7 @@ Scope {
 
                     Image {
                         anchors.fill: parent
-                        source: Qt.resolvedUrl("temp-overview-wallpaper.svg")
+                        source: Qt.resolvedUrl("temp-overview-wallpaper.png")
                         fillMode: Image.PreserveAspectCrop
                     }
                 }

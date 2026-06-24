@@ -9,8 +9,8 @@
 
 blur {
     passes 3
-    offset 3.0
-    noise 0.02
+    offset 4.0
+    noise 0.03
 }
 
 input {
@@ -616,9 +616,12 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
+    Shift+Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+
+    Mod+Shift+S { spawn 'grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" | wl-copy --type image/png'; }
+    Print { spawn 'grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png" | wl-copy --type image/png'; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -642,4 +645,12 @@ binds {
 layer-rule {
     match namespace="^overview-wallpaper$"
     place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="^dock$"
+
+    background-effect {
+        blur true
+    }
 }

@@ -11,4 +11,5 @@ import "./Toasts"
 Scope {
     Bar {}
     Wallpaper {}
+    Dock {}
 }
