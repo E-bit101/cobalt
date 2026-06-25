@@ -1,4 +1,102 @@
 {
+    "ignored": [
+        ".config/cobalt"
+    ],
+
+    "audio": {
+        "input": null,
+        "output": null,
+        "inputVolume": 100,
+        "outputVolume": 100
+    },
+
+    "monitors": {
+        "eDP-1": {
+            "scale": 1,
+            "resolution": "1920x1080",
+            "position": "0,0",
+            "mirror": null,
+            "brightness": 100
+        }
+    },
+
+    "wifi": {
+        "enabled": true,
+        "ethernetEnabled": true,
+        "networks": [
+            { "name": "highPriorityNetwork", "autoConnect": true, "priority": 8 },
+            { "name": "lowPriorityNetwork", "autoConnect": false, "priority": 2 }
+        ]
+    },
+
+    "bluetooth": {
+        "enabled": true,
+        "devices": [
+            { "name": "Steam Controller", "autoConnect": true }
+        ]
+    },
+
+    "lookAndFeel": {
+        "colors": { "primary": "#1982F7", "background": "#000000" },
+        "animationSpeed": 100,
+        "dock": {
+            "type": "square",
+            "widgetsLeft": [],
+            "widgetsCenter": ["launcher", "apps"],
+            "widgetsRight": []
+        },
+        "bar": {
+            "type": "square",
+            "widgetsLeft": ["workspaces", "performanceMonitor"],
+            "widgetsCenter": [{"name": "clock", "format": "h:mm:ss AP ddd, MMM dd"}],
+            "widgetsRight": ["notifications", "wifi", "battery", "audio", "brightness", "controlCenter"]
+        },
+        "launcher": {
+            "type": "start",
+            "widgetsTop": "search",
+            "widgetsCenter": "appsGrid",
+            "widgetsBottom": "session"
+        },
+        "launcherAnchor": "dock",
+        "controlCenter": {
+            "type": "rounded",
+            "widgets": [
+                [["user", "spacer", "settings", "session"]],
+                [["wifi", "bluetooth", "performance", "caffeine"], ["notifications", "nightLight"]],
+                [["audioSlider"], ["brightnessSlider"]]
+            ]
+        },
+        "style": "frosted",
+        "toasts": "bubble",
+        "decorations": {
+            "frame": "none",
+            "border": {"color": ["rgba(33ccffee)", "rgba(00ff99ee)"], "angle": 45 },
+            "corners": [10, 10, 10, 10],
+            "opacity":  {
+                "*": 100,
+                "!*": 100,
+                "alacritty": 90
+            }
+        },
+        "windowsFloatByDefault": false,
+        "desktop": {
+            "wallpaper": "~/Pictures/wallpaper.png",
+            "widgets": [ 
+                {"name": "clockLarge", "anchor": "top,center", "format": "h:mm"}, 
+                {"name": "clock", "anchor": "top,center", "format": "ddd, MMM dd"} 
+            ]
+        },
+        "lockScreen": {
+            "type": "staged",
+            "widgets": [ 
+                {"name": "clockLarge", "anchor": "top,center", "format": "h:mm"}, 
+                {"name": "clock", "anchor": "top,center", "format": "ddd, MMM dd"} 
+            ]
+        }
+    },
+
+    "compositor": "niri",
+
     "binds": {
         "Mod+T": "terminal",
         "Mod+M": "exit",
