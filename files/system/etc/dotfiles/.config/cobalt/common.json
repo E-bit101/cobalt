@@ -98,11 +98,11 @@
     "compositor": "niri",
 
     "binds": {
-        "Mod+T": "terminal",
+        "Mod+T": "alacritty",
         "Mod+M": "exit",
-        "Mod+E": "fileManager",
+        "Mod+E": "nemo",
         "Mod+V": "floating",
-        "Mod+R": "launcher",
+        "Mod+R": "echo launcher",
         "Mod+J": "applyPreset",
         "Mod+C": "close",
         "Mod+<number>": "workspace<number>",
@@ -113,6 +113,6 @@
         "Mod+Shift+scrollDown": "nextWindow",
         "Mod+Shift+F": "maximize",
         "Mod+F": "fullscreen",
-        "Mod+Shift+/": "keybinds"
+        "Print": "grim -g \"$(slurp)\" - | tee \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\" | wl-copy --type image/png"
     }
 }
