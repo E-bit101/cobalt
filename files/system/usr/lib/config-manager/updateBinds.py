@@ -15,6 +15,8 @@ HYPRLAND_KEY_SUBS = {
 def niri_cmd(cmd):
     if cmd == "exit":
         return "quit"
+    elif cmd == "overview":
+        return "toggle-overview"
     elif cmd == "maximize":
         return "maximize-column"
     elif cmd == "fullscreen":
@@ -145,7 +147,7 @@ def update(home_dir):
 
     hypr_binds = "\n"
     for i in binds + binds_alt:
-        hypr_binds += bind_to_command(i, "niri") + "\n"
+        hypr_binds += bind_to_command(i, "hypr") + "\n"
 
     with open(hypr_config_dir, "r") as f:
         text = replace_section(f.read(), "keybinds", hypr_binds)
