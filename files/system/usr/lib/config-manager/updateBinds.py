@@ -51,7 +51,7 @@ def hypr_cmd(cmd):
     elif cmd == "floating":
         return 'hl.dsp.window.float({ action = "toggle" })'
     elif cmd == "applyPreset":
-        return 'hl.dsp.layout("togglesplit"))'
+        return 'hl.dsp.layout("togglesplit")'
     elif cmd == "close":
         return 'hl.dsp.window.close()'
     elif cmd.startswith("workspace"):
@@ -87,7 +87,7 @@ def bind_to_command(bind, wm="niri"):
         command = key + " { " + niri_cmd(action) + "; }"
     else:
         command = f"hl.bind({'mainMod .. ' if key.startswith("Mod") else ''}\"{hypr_subs(key)}\", "
-        command += hypr_cmd(action)
+        command += hypr_cmd(action) + ")"
 
     return command
 
@@ -126,16 +126,22 @@ def update(home_dir):
         binds += get_binds(k, v)
 
     binds_alt = []
-    for k, v in config_niri["binds"].items():
-        binds += get_binds(k, v)
+    try:
+        for k, v in config_niri["binds"].items():
+            binds += get_binds(k, v)
+    except KeyError:
+        pass
 
     niri_binds = "\n"
     for i in binds + binds_alt:
         niri_binds += bind_to_command(i, "niri") + "\n"
 
     binds_alt = []
-    for k, v in config_hypr["binds"].items():
-        binds += get_binds(k, v)
+    try:
+        for k, v in config_hypr["binds"].items():
+            binds += get_binds(k, v)
+    except KeyError:
+        pass
 
     hypr_binds = "\n"
     for i in binds + binds_alt:
