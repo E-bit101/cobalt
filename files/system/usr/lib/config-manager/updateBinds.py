@@ -1,4 +1,4 @@
-import json
+import json, os
 from util import replace_section
 
 HYPRLAND_KEY_SUBS = {

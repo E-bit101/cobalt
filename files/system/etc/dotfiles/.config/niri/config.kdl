@@ -368,9 +368,9 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
 
---- KEYBINDS ---
+// --- KEYBINDS ---
 
---- END ---
+// --- END ---
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
