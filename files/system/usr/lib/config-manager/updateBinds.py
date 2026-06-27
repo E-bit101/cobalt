@@ -38,7 +38,7 @@ def niri_cmd(cmd):
     elif cmd == "nextWindow":
         return "focus-column-right"
         
-    return "spawn-sh \"" + cmd + "\""
+    return "spawn-sh \"" + cmd.replace("\"", "\\\"") + "\""
 
 
 def hypr_cmd(cmd):
@@ -112,19 +112,33 @@ def update(home_dir):
     hypr_config_dir = os.path.join(home_dir, ".config", "hypr", "hyprland.lua")
     niri_config_dir = os.path.join(home_dir, ".config", "niri", "config.kdl")
 
-    with open(hypr_config_dir, "r") as f:
+    with open(global_config_dir, "r") as f:
         config = json.load(f)
+
+    with open(os.path.join(home_dir, ".config", "cobalt", "niri.json"), "r") as f:
+        config_niri = json.load(f)
+
+    with open(os.path.join(home_dir, ".config", "cobalt", "hypr.json"), "r") as f:
+        config_hypr = json.load(f)
 
     binds = []
     for k, v in config["binds"].items():
         binds += get_binds(k, v)
 
+    binds_alt = []
+    for k, v in config_niri["binds"].items():
+        binds += get_binds(k, v)
+
     niri_binds = "\n"
-    for i in binds:
+    for i in binds + binds_alt:
         niri_binds += bind_to_command(i, "niri") + "\n"
 
+    binds_alt = []
+    for k, v in config_hypr["binds"].items():
+        binds += get_binds(k, v)
+
     hypr_binds = "\n"
-    for i in binds:
+    for i in binds + binds_alt:
         hypr_binds += bind_to_command(i, "niri") + "\n"
 
     with open(hypr_config_dir, "r") as f:
