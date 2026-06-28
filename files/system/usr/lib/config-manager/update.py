@@ -1,5 +1,6 @@
 import os, pwd, shutil
 import updateBinds as binds
+import updateCompositors as compositors
 import json
 
 SOURCE_DIR = "/etc/dotfiles"
@@ -29,20 +30,20 @@ for user in pwd.getpwall():
 
     pwuid = user.pw_uid
 
-    if os.path.exists(os.path.join(home, ".config", "cobalt", "common")):
-        with open(os.path.join(home, ".config", "cobalt", "common"), "r") as f:
+    if os.path.exists(os.path.join(home, ".config", "cobalt", "common.json")):
+        with open(os.path.join(home, ".config", "cobalt", "common.json"), "r") as f:
             config = json.load(f)
             ignored_paths = config["ignored"]
 
-    hypr_config_dir = os.path.join(home_dir, ".config", "hypr", "hyprland.lua")
-    niri_config_dir = os.path.join(home_dir, ".config", "niri", "config.kdl")
+    hypr_config_dir = os.path.join(home, ".config", "hypr", "hyprland.lua")
+    niri_config_dir = os.path.join(home, ".config", "niri", "config.kdl")
 
     if os.path.exists(hypr_config_dir):
-        with open(os.path.join(home_dir, ".config", "cobalt", "niri.json"), "r") as f:
+        with open(os.path.join(home, ".config", "cobalt", "niri.json"), "r") as f:
             config_niri = json.load(f)
 
     if os.path.exists(niri_config_dir):
-        with open(os.path.join(home_dir, ".config", "cobalt", "hypr.json"), "r") as f:
+        with open(os.path.join(home, ".config", "cobalt", "hypr.json"), "r") as f:
             config_hypr = json.load(f)
 
     for item in os.listdir(SOURCE_DIR):
@@ -54,6 +55,7 @@ for user in pwd.getpwall():
         else:
             copy_check(src, dst)        
 
+    compositors.update(home, config, config_niri, config_hypr)
     binds.update(home, config, config_niri, config_hypr)
 
     

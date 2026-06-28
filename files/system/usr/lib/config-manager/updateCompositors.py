@@ -22,3 +22,11 @@ def update(home_dir, config, config_niri, config_hypr):
 
     with open(niri_config_dir, "w") as f:
         f.write(text)
+
+    with open(hypr_config_dir, "r") as f:
+        text = f.read()
+        if config["lookAndFeel"]["animationSpeed"] <= 0:
+            text = set_hypr_property(text, "hl.config:animations:enabled", "False")
+
+    with open(hypr_config_dir, "w") as f:
+        f.write(text)

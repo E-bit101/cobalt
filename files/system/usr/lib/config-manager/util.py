@@ -66,3 +66,46 @@ def set_niri_property(text, property_path, value, append=False):
         return text[:end] + f"\n{'\t' * len(property_path)}{value}" + text[end:]
     else:
         return text[:begin] + f" {value}" + text[end:]
+
+def set_hypr_property(text, property_path, value, append=False):
+    """
+        Sets a property in a hyprland `hyprland.lua` file
+
+        `text`: the contents of the hyprland `hyprland.lua` file
+        `property_path`: the path of the property to change seperated by "." and in-property json fields seperated by ":"
+            for example: `hl.config:general:border_size` or `hl.env`
+        `value`: the value the property should be set to. Include quotes ("") for strings
+            with `append=True` this represents the final property name as well
+        `append`: Should the value be appended to the path (True) or should it be modified (False)
+
+        `returns`: `text` with the property modified
+    """
+    if append:
+        if ":" in property_path:
+            t = " = {".join(property_path.split(":")[1:])
+            return text + "\n" + property_path.split(":")[0] + "( { " + f"{t} = {value}" + "} " * len(property_path.split(":")) + ")"
+        else:
+            return text + f"{property_path}( {value} )"
+
+    if ":" in property_path:
+        property_path = property_path.split(":") + ["="]
+        begin = 0
+        
+        for i in property_path:
+            begin += text[begin:].find(i) + len(i)
+            print(text[begin-2:begin+2])
+            if begin == len(i) - 1:
+                print(f"Could not set property {property_path}")
+                return text
+
+        end = begin
+
+        while end < len(text) and text[end] != ",":
+            end += 1
+
+    begin = text.find(property_path + "(") + len(property_path + "(")
+    end = text[begin:].find(")\n") + begin
+
+    print(text[begin:end])
+
+    return text[:begin] + f"{value}" + text[end:]
