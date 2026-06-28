@@ -1,4 +1,3 @@
-import json, os
 from util import replace_section
 
 HYPRLAND_KEY_SUBS = {
@@ -104,24 +103,17 @@ def get_binds(code, result, wm="niri"):
 
     return binds
 
-def update(home_dir):
+def update(home_dir, config, config_niri, config_hypr):
     """
         Update the keybinds in the niri and hyprland configs
 
         `home_dir`: user home directory where the configs are
+        `config`: the global JSON config as a dict
+        `config_niri`: the global niri specific config as a dict
+        `config_hypr`: the global niri specific config as a dict
     """
-    global_config_dir = os.path.join(home_dir, ".config", "cobalt", "common.json")
     hypr_config_dir = os.path.join(home_dir, ".config", "hypr", "hyprland.lua")
     niri_config_dir = os.path.join(home_dir, ".config", "niri", "config.kdl")
-
-    with open(global_config_dir, "r") as f:
-        config = json.load(f)
-
-    with open(os.path.join(home_dir, ".config", "cobalt", "niri.json"), "r") as f:
-        config_niri = json.load(f)
-
-    with open(os.path.join(home_dir, ".config", "cobalt", "hypr.json"), "r") as f:
-        config_hypr = json.load(f)
 
     binds = []
     for k, v in config["binds"].items():
