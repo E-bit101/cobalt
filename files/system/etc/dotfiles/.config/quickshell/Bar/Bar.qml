@@ -2,80 +2,91 @@ import Quickshell
 import QtQuick
 import Quickshell.Wayland
 import "../Widgets"
+import "../"
 
 Scope {
     Variants {
         model: Quickshell.screens
 
-        PanelWindow {
-            color: "transparent"
+        Item {
             required property var modelData
 
-            screen: modelData
+            // Bar
+            PanelWindow {
+                screen: modelData
 
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
+                WlrLayershell.namespace: "shellPanel"
 
-            implicitHeight: 42
-            exclusiveZone: 32
-
-            Rectangle {
-                id: bar
-                
-
-                anchors {
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
-                }
-
-                height: 32
-                color: "#000000"
-
-                Workspaces {
-                    screen: modelData
-
-                    anchors {
-                        left: parent.left
-                        leftMargin: 8
-                        verticalCenter: parent.verticalCenter
-                    }
-                }
-
-                ClockWidget {
-                    anchors.centerIn: parent
-                }
-
-                BatteryWidget {
-                    anchors {
-                        right: parent.right
-                        rightMargin: 10
-                        verticalCenter: parent.verticalCenter
-                    }
-                }
-            }
-
-            Rectangle {
-                anchors {
-                    top: bar.bottom
-                    left: bar.left
-                    right: bar.right
-                }
-
-                height: 10
                 color: "transparent"
 
-                gradient: Gradient {
-                    GradientStop {
-                        position: 0.0
-                        color: "#80000000"
+                anchors {
+                    top: true
+                    left: true
+                    right: true
+                }
+
+                implicitHeight: 32
+                exclusiveZone: 32
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: Theme.bgPrimary
+
+                    Workspaces {
+                        screen: modelData
+
+                        anchors {
+                            left: parent.left
+                            leftMargin: 8
+                            verticalCenter: parent.verticalCenter
+                        }
                     }
-                    GradientStop {
-                        position: 1.0
-                        color: "#00000000"
+
+                    ClockWidget {
+                        anchors.centerIn: parent
+                    }
+
+                    BatteryWidget {
+                        anchors {
+                            right: parent.right
+                            rightMargin: 10
+                            verticalCenter: parent.verticalCenter
+                        }
+                    }
+                }
+            }
+
+            // Shadow
+            PanelWindow {
+                screen: modelData
+
+                WlrLayershell.namespace: "shellPanelShadow"
+
+                color: "transparent"
+
+                anchors {
+                    top: true
+                    left: true
+                    right: true
+                }
+
+                implicitHeight: 10
+                exclusiveZone: 0
+
+                Rectangle {
+                    visible: Theme.shadows
+                    anchors.fill: parent
+                    color: "transparent"
+
+                    gradient: Gradient {
+                        GradientStop {
+                            position: 0.0
+                            color: "#80000000"
+                        }
+                        GradientStop {
+                            position: 1.0
+                            color: "#00000000"
+                        }
                     }
                 }
             }

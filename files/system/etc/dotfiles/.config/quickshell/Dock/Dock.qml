@@ -2,13 +2,15 @@ import Quickshell
 import QtQuick
 import Quickshell.Wayland
 import "../Widgets"
+import "../"
 
 Scope {
     Variants {
         model: Quickshell.screens
 
         PanelWindow {
-            WlrLayershell.namespace: "dock"
+            visible: Theme.dockEnabled
+            WlrLayershell.namespace: "shellPanel"
             color: "transparent"
             required property var modelData
 
@@ -34,7 +36,7 @@ Scope {
 
                 Rectangle {
                     height: 1
-                    color: "#a0323232"
+                    color: Theme.bgAccent
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -43,7 +45,7 @@ Scope {
                 }
 
                 height: 48
-                color: "#c0000000"
+                color: Theme.bgPrimary
 
                 Row {
                     anchors.centerIn: parent

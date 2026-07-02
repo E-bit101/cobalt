@@ -128,8 +128,8 @@ hl.config({
 
         blur = {
             enabled   = true,
-            size      = 5,
-            passes    = 1,
+            size      = 4,
+            passes    = 3,
             vibrancy  = 0.1696,
         },
     },
@@ -262,6 +262,42 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 --- KEYBINDS ---
 
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("alacritty"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("nemo"))
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("echo launcher"))
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 0}))
+hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1}))
+hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = 2}))
+hl.bind(mainMod .. " + 3", hl.dsp.focus({ workspace = 3}))
+hl.bind(mainMod .. " + 4", hl.dsp.focus({ workspace = 4}))
+hl.bind(mainMod .. " + 5", hl.dsp.focus({ workspace = 5}))
+hl.bind(mainMod .. " + 6", hl.dsp.focus({ workspace = 6}))
+hl.bind(mainMod .. " + 7", hl.dsp.focus({ workspace = 7}))
+hl.bind(mainMod .. " + 8", hl.dsp.focus({ workspace = 8}))
+hl.bind(mainMod .. " + 9", hl.dsp.focus({ workspace = 9}))
+hl.bind(mainMod .. " + CTRL + 0", hl.dsp.window.move({ workspace = 0}))
+hl.bind(mainMod .. " + CTRL + 1", hl.dsp.window.move({ workspace = 1}))
+hl.bind(mainMod .. " + CTRL + 2", hl.dsp.window.move({ workspace = 2}))
+hl.bind(mainMod .. " + CTRL + 3", hl.dsp.window.move({ workspace = 3}))
+hl.bind(mainMod .. " + CTRL + 4", hl.dsp.window.move({ workspace = 4}))
+hl.bind(mainMod .. " + CTRL + 5", hl.dsp.window.move({ workspace = 5}))
+hl.bind(mainMod .. " + CTRL + 6", hl.dsp.window.move({ workspace = 6}))
+hl.bind(mainMod .. " + CTRL + 7", hl.dsp.window.move({ workspace = 7}))
+hl.bind(mainMod .. " + CTRL + 8", hl.dsp.window.move({ workspace = 8}))
+hl.bind(mainMod .. " + CTRL + 9", hl.dsp.window.move({ workspace = 9}))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + mouse_down", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | tee \"$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\" | wl-copy --type image/png"))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("overview"))
+
 --- END ---
 
 -- Move focus with mainMod + arrow keys
@@ -341,4 +377,9 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+hl.layer_rule({
+    match        = { namespace = "shellPanel" },
+    blur         = true,
 })

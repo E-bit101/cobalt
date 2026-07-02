@@ -2,57 +2,33 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
-import Quickshell.Io
-import "../Services"
+import Quickshell.Services.UPower
 
 Singleton {
-    property int percent: 0
-    property string status: "Unknown"
+    id: root
 
-    Process {
-        id: capacityProcess
+    readonly property UPowerDevice device: UPower.displayDevice
 
-        command: [
-            "cat",
-            "/sys/class/power_supply/BAT0/capacity"
-        ]
+    // False on desktops/machines that don't report a laptop battery so
+    // widgets can hide themselves instead of showing a stale "0%"
+    readonly property bool available: device.ready && device.isLaptopBattery
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                Battery.percent = parseInt(text.trim())
-            }
+    readonly property int percent: available ? Math.round(device.percentage * 100) : 0
+    readonly property int state: device.state
+
+    readonly property bool isCharging: state === UPowerDeviceState.Charging
+    readonly property bool isFullyCharged: state === UPowerDeviceState.FullyCharged
+    readonly property bool isLow: available && !isCharging && percent <= 20
+
+    readonly property string status: {
+        switch (state) {
+        case UPowerDeviceState.Charging: return "Charging"
+        case UPowerDeviceState.Discharging: return "Discharging"
+        case UPowerDeviceState.FullyCharged: return "Full"
+        case UPowerDeviceState.PendingCharge: return "Not charging"
+        case UPowerDeviceState.PendingDischarge: return "Pending discharge"
+        case UPowerDeviceState.Empty: return "Empty"
+        default: return "Unknown"
         }
-
-        running: true
-    }
-
-    Process {
-        id: statusProcess
-
-        command: [
-            "cat",
-            "/sys/class/power_supply/BAT0/status"
-        ]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                Battery.status = text.trim()
-            }
-        }
-
-        running: true
-    }
-
-    function refresh() {
-        capacityProcess.running = true
-        statusProcess.running = true
-    }
-
-    Timer {
-        interval: 3
-        running: true
-        repeat: true
-
-        onTriggered: refresh()
     }
 }
