@@ -49,7 +49,7 @@ Scope {
 
                 Row {
                     anchors.centerIn: parent
-                    spacing: 10
+                    spacing: 16
 
                     Image {
                         anchors.verticalCenter: parent.verticalCenter
@@ -58,14 +58,8 @@ Scope {
                         fillMode: Image.PreserveAspectFit
                     }
 
-                    Image {
-                        anchors.verticalCenter: parent.verticalCenter
-                        source: Qt.resolvedUrl("search.svg")
-                        height: 26
-                        fillMode: Image.PreserveAspectFit
-                    }
+                    AppsWidget {}
                 }
-                
             }
         }
     }
