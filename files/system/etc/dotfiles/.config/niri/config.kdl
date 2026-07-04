@@ -447,3 +447,20 @@ layer-rule {
         }
     }
 }
+
+layer-rule {
+    match namespace="^launcher$"
+
+    geometry-corner-radius 10
+
+    background-effect {
+        blur true
+    }
+
+    popups {
+        background-effect {
+            blur true
+            xray true
+        }
+    }
+}

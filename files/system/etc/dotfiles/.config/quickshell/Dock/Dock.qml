@@ -3,6 +3,7 @@ import QtQuick
 import Quickshell.Wayland
 import "../Widgets"
 import "../"
+import "../Launcher"
 
 Scope {
     Variants {
@@ -56,6 +57,17 @@ Scope {
                         source: Qt.resolvedUrl("icon.svg")
                         height: 30
                         fillMode: Image.PreserveAspectFit
+
+                        HoverHandler {
+                            id: hover
+                            cursorShape: Qt.PointingHandCursor
+                        }
+
+                        TapHandler {
+                            onTapped: {
+                                Theme.launcherVisible = !Theme.launcherVisible
+                            }
+                        }
                     }
 
                     AppsWidget {}

@@ -12,4 +12,5 @@ Scope {
     Bar {}
     Wallpaper {}
     Dock {}
+    Launcher {}
 }

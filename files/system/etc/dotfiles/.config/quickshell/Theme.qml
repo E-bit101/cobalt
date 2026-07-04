@@ -15,4 +15,6 @@ QtObject {
     
     // Dock
     property bool dockEnabled: true
+
+    property bool launcherVisible: false
 }
