@@ -1,7 +1,8 @@
 import QtQuick
 import "../Services"
+import "../"
 
 Text {
-    color: "#ffffff"
+    color: Theme.textColor
     text: Time.time
 }

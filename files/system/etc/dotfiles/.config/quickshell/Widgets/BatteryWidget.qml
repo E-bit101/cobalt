@@ -2,11 +2,12 @@ import QtQuick
 import Quickshell.Services.UPower
 
 import "../Services"
+import "../"
 
 Text {
     id: root
 
-    property color normalColor: "#ffffff"
+    property color normalColor: Theme.textColor
     property color chargingColor: "#5fff5f"
     property color pluggedColor: "#006eff"
     property color lowColor: "#ff5f5f"

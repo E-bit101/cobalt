@@ -28,7 +28,7 @@ Scope {
 
                     Image {
                         anchors.fill: parent
-                        source: Qt.resolvedUrl("temp-overview-wallpaper.png")
+                        source: Qt.resolvedUrl("IMG_1671.png")
                         fillMode: Image.PreserveAspectCrop
                     }
                 }
@@ -51,7 +51,7 @@ Scope {
 
                     Image {
                         anchors.fill: parent
-                        source: Qt.resolvedUrl("temp-wallpaper.svg")
+                        source: Qt.resolvedUrl("IMG_1671.png")
                         fillMode: Image.PreserveAspectCrop
                     }
                 }

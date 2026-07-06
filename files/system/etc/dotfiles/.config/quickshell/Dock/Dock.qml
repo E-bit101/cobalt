@@ -4,14 +4,19 @@ import Quickshell.Wayland
 import "../Widgets"
 import "../"
 import "../Launcher"
+import "../Shaders"
 
 Scope {
     Variants {
         model: Quickshell.screens
 
         PanelWindow {
+            margins {
+                bottom: Theme.floatingDock ? 5 : 0
+            }
+
             visible: Theme.dockEnabled
-            WlrLayershell.namespace: "shellPanel"
+            WlrLayershell.namespace: Theme.fluid ? "shellPanelNoBlur" : "shellPanel"
             color: "transparent"
             required property var modelData
 
@@ -19,59 +24,71 @@ Scope {
 
             anchors {
                 bottom: true
-                left: true
-                right: true
+                left: !Theme.floatingDock
+                right: !Theme.floatingDock
             }
 
             implicitHeight: 48
             exclusiveZone: 48
+            implicitWidth: 570
 
             Rectangle {
-                id: bar
-
+                height: 1
+                color: Theme.bgAccent
                 anchors {
                     top: parent.top
                     left: parent.left
                     right: parent.right
                 }
 
-                Rectangle {
-                    height: 1
-                    color: Theme.bgAccent
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                        right: parent.right
-                    }
-                }
+                visible: !Theme.floatingDock
+            }
 
-                height: 48
+            Rectangle {
+                anchors.fill: parent
                 color: Theme.bgPrimary
+                visible: !Theme.fluid
+            }
 
-                Row {
-                    anchors.centerIn: parent
-                    spacing: 16
+            Fluid {
+                anchors.fill: parent
 
-                    Image {
-                        anchors.verticalCenter: parent.verticalCenter
-                        source: Qt.resolvedUrl("icon.svg")
-                        height: 30
-                        fillMode: Image.PreserveAspectFit
+                wallpaper: Qt.resolvedUrl("../Decorations/IMG_1671.png")
 
-                        HoverHandler {
-                            id: hover
-                            cursorShape: Qt.PointingHandCursor
-                        }
+                screenSize: Qt.vector2d(
+                    modelData.width,
+                    modelData.height)
 
-                        TapHandler {
-                            onTapped: {
-                                Theme.launcherVisible = !Theme.launcherVisible
-                            }
-                        }
+                screenX: (modelData.width - 570) / 2
+                screenY: modelData.height - 48 - 5
+                cornerRadius: 0.7
+                visible: Theme.fluid
+            }
+
+            Row {
+                id: stuffs
+                anchors.centerIn: parent
+                spacing: 16
+
+                Image {
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: Qt.resolvedUrl("icon.svg")
+                    height: 30
+                    fillMode: Image.PreserveAspectFit
+
+                    HoverHandler {
+                        id: hover
+                        cursorShape: Qt.PointingHandCursor
                     }
 
-                    AppsWidget {}
+                    TapHandler {
+                        onTapped: {
+                            Theme.launcherVisible = !Theme.launcherVisible
+                        }
+                    }
                 }
+
+                AppsWidget {}
             }
         }
     }

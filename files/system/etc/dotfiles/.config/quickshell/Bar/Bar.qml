@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import Quickshell.Wayland
 import "../Widgets"
+import "../Shaders"
 import "../"
 
 Scope {
@@ -11,13 +12,17 @@ Scope {
         Item {
             required property var modelData
 
-            // Bar
             PanelWindow {
+                WlrLayershell.namespace: Theme.fluid ? "shellPanelNoBlur" : "shellPanel"
                 screen: modelData
 
-                WlrLayershell.namespace: "shellPanel"
-
                 color: "transparent"
+
+                margins {
+                    top: Theme.floatingBar ? 5 : 0
+                    left: Theme.floatingBar ? 5 : 0
+                    right: Theme.floatingBar ? 5 : 0
+                }
 
                 anchors {
                     top: true
@@ -28,18 +33,34 @@ Scope {
                 implicitHeight: 32
                 exclusiveZone: 32
 
-                Rectangle {
+                Item {
                     anchors.fill: parent
-                    color: Theme.bgPrimary
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: Theme.bgPrimary
+                        visible: !Theme.fluid
+                    }
+
+                    Fluid {
+                        anchors.fill: parent
+
+                        wallpaper: Qt.resolvedUrl("../Decorations/IMG_1671.png")
+
+                        screenSize: Qt.vector2d(
+                            modelData.width,
+                            modelData.height)
+
+                        screenX: 5
+                        screenY: 5
+                        visible: Theme.fluid
+                    }
 
                     Workspaces {
                         screen: modelData
-
-                        anchors {
-                            left: parent.left
-                            leftMargin: 8
-                            verticalCenter: parent.verticalCenter
-                        }
+                        anchors.left: parent.left
+                        anchors.leftMargin: 8
+                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     ClockWidget {
@@ -47,46 +68,9 @@ Scope {
                     }
 
                     BatteryWidget {
-                        anchors {
-                            right: parent.right
-                            rightMargin: 10
-                            verticalCenter: parent.verticalCenter
-                        }
-                    }
-                }
-            }
-
-            // Shadow
-            PanelWindow {
-                screen: modelData
-
-                WlrLayershell.namespace: "shellPanelShadow"
-
-                color: "transparent"
-
-                anchors {
-                    top: true
-                    left: true
-                    right: true
-                }
-
-                implicitHeight: 10
-                exclusiveZone: 0
-
-                Rectangle {
-                    visible: Theme.shadows
-                    anchors.fill: parent
-                    color: "transparent"
-
-                    gradient: Gradient {
-                        GradientStop {
-                            position: 0.0
-                            color: "#80000000"
-                        }
-                        GradientStop {
-                            position: 1.0
-                            color: "#00000000"
-                        }
+                        anchors.right: parent.right
+                        anchors.rightMargin: 10
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }
