@@ -79,6 +79,6 @@ void main()
         fragColor.rgb *= gamma;
     }
     else {
-        fragColor = texture(wallpaper, (uv * panelSize + panelPos) / screenSize);
+        fragColor = bec4(0.0);
     }
 }
